@@ -14,10 +14,10 @@ fun main() {
             4. Exit
             """
         )
-        print("Choose an Option: ")
+        println("Choose an Option: ")
         when (readLine()?.trim()) {
             "1" -> {
-                print("Enter Task name: ")
+                println("Enter Task name: ")
                 val title = readLine()?.trim() ?: ""
                 if(!title.isNullOrEmpty()) {
                     val task = taskService.addTask(title)
@@ -27,13 +27,22 @@ fun main() {
                 }
             }
             "2" -> {
-
+                val tasks = taskService.printTasks(taskService.getAllTasks())
+                println(tasks)
             }
             "3" -> {
-
+                println("Enter Task ID: ")
+                val id = readLine()?.trim()
+                    ?.toIntOrNull()
+                if (id != null) {
+                    val success = taskService.completeTask(id)
+                    if (success) {
+                        println("Complete")
+                    }
+                }
             }
             "4" -> {
-
+                return
             }
         }
 
